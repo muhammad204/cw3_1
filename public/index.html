@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <html lang="eng">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -7,16 +8,25 @@
     <link rel="manifest" href="cw3.webmanifest">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script>
-      if('serviceWorker' in navigator){
-        navigator.serviceWorker.register('service-worker.js')
-      };
+      if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+              navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                  // Registration was successful
+                  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+              }, function(err) {
+                  // Registration failed
+                  console.log('ServiceWorker registration failed: ', err);
+              });
+          });
+      }
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+    <!-- Include your main JavaScript file -->
+    <script src="main.js"></script>
+</body>
 </html>
