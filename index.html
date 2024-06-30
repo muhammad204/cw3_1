@@ -1,0 +1,11 @@
+<!doctype html><html lang="eng"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="css/bootstrap.css"/><link rel="manifest" href="cw3.webmanifest"><title>cw3</title><script>if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+              navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                  // Registration was successful
+                  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+              }, function(err) {
+                  // Registration failed
+                  console.log('ServiceWorker registration failed: ', err);
+              });
+          });
+      }</script><script defer="defer" src="/js/chunk-vendors.35e6f580.js"></script><script defer="defer" src="/js/app.b62b7e20.js"></script><link href="/css/app.5679add6.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but cw3 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="main.js"></script></body></html>
