@@ -1,0 +1,34 @@
+.text-justify {
+    text-align: justify;
+}
+.bg-success {
+    background-color: limegreen !important;
+}
+.text-bg-black {
+    background-color: #220000;
+    color: #ffffff;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.bg-success {
+    background-color: limegreen;
+}
+
+.text-bg-black {
+    background-color: black;
+    color: #ffffff;
+}
+
+.box {
+    justify-content: space-between;
+}
+
+/* .bg.img {
+    background-image: url(/Images/images.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+} */
