@@ -40,6 +40,9 @@ var CacheName = 'mohschool-v1';
 var CacheFiles = [
     'index.html',
     'cw3.webmanifest',
+    'css/bootstrap.css',
+    'css/bootstrap.min.css',
+    'css/style.css',
     'images/arabic.jpg',
     'images/arts.jpg',
     'images/chess.jpg',

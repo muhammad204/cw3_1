@@ -24,3 +24,4 @@ socket.onclose = () => {
 };
 
 createApp(App).mount('#app');
+ 
