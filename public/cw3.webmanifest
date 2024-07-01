@@ -20,7 +20,7 @@
     "background_color": "#fff",
     "screenshots": [
       {
-        "src": "/images/pro.png",
+        "src": "/images/top.png",
         "type": "image/png",
         "sizes": "1366x768",
         "form_factor": "wide"

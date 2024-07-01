@@ -1,5 +1,5 @@
 var cacheName = 'mohschool-v1';
-var cacheFiles = [];
+var cacheFiles = ["/images/top.png","/images/pro.png"];
 
 self.addEventListener("install", (e) => {
     console.log("[ServiceWorker] - Install");
