@@ -1,20 +1,35 @@
 {
-    "name": "Moh's PWA",
-    "description": "my School",
+    "name": "Moh's learning",
+    "short_name": "Moh's",
+    "description": "A fun after school App",
     "icons": [
-        {
-            "src": "public/images/logo.png",
-            "sizes": "192x192",
-            "type": "images/logo.jpg"
-        },
-        {
-            "src": "public/images/logo.png",
-            "sizes": "512x512",
-            "type": "images/ororo.png"
-        }
-        
+      {
+        "src": "/images/logo2.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      },
+      {
+        "src": "/images/logo3.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
     ],
-    "start_url": "index.html",
-    "display":"fullscreen",
-    "background_color": "#B12A34"
-}
+    "id": "/cw3_1/",
+    "start_url": "/cw3_1/",
+    "display": "fullscreen",
+    "background_color": "#fff",
+    "screenshots": [
+      {
+        "src": "/images/pro.png",
+        "type": "image/png",
+        "sizes": "1366x768",
+        "form_factor": "wide"
+      },
+      {
+        "src": "/images/top.png",
+        "type": "image/png",
+        "sizes": "1290x2796",
+        "form_factor": "narrow"
+      }
+    ]
+  }
