@@ -2,7 +2,7 @@
   <div>
     <h2>Shopping cart</h2>
     <ul class="row">
-      <li v-for="item in cartCourses" :key="item.course.id" class="card col-md-3 m-2 shadow">
+      <li v-for="item in cartCourses" :key="item.course.id" class="card col-lg-4 m-2 shadow">
         <img v-bind:src="item.course.image" class="ct height: 200px; width: 100%; mx-auto d-block card-img-top" />
         <div class="card-body">
           <h2 class="card-title">{{ item.course.title }}</h2>
