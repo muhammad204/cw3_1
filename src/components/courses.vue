@@ -1,27 +1,27 @@
 <template>
   <div class="row">
     
-    <div class="col-md-4">
-    <input v-model="searchQuery" class="form-control" style="width: 350px" type="text" placeholder="Search for courses" />
+    <div class="col-md-4 my-2">
+    <input v-model="searchQuery" class="form-control" type="text" placeholder="Search for courses" />
     </div>
 
-    <div class="col-md-4">
-    <select v-model="sortOption" class="form-control" style="width: 350px">
+    <div class="col-md-4 my-2">
+    <select v-model="sortOption" class="form-control" >
       <option value="title">Title</option>
       <option value="location">Location</option>
       <option value="price">Price</option>
     </select>
     </div>
     
-    <div class="col-md-4">
-    <select v-model="sortOrder" class="form-control" style="width: 350px">
+    <div class="col-md-4 my-2">
+    <select v-model="sortOrder" class="form-control">
       <option value="asc">Ascending</option>
       <option value="desc">Descending</option>
     </select>
     </div>
 
     <div class="row m-4">
-      <div class="col-md-4" v-for="course in sortedCourses" :key="course.id">
+      <div class="col-lg-4" v-for="course in sortedCourses" :key="course.id">
         <div class="card m-3 shadow">
           <img
             :src="'https://cw-2-smoky.vercel.app/' + course.image"
