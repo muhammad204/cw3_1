@@ -1,72 +1,26 @@
 <template class="bg-light">
   <div id="app" class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-3">
-      <div class="collapse navbar-collapse">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-3 row">
+      <div class="collapse navbar-collapse col-md-6">
         <h1 v-text="sitename" class="mt-5"></h1>
       </div>
- 
-      <button
-        v-bind:disabled="cart.length == 0"
-        v-on:click="showCheckout"
-        class="btn btn-outline-success btn-lg float-end m-4 p-2"
-      >
-        Checkout {{ cartItemCount }}</button
-      ><br />
-    
-      <div class="row m-3">
-        <div class="form-group col-md-6 m-2">
-          <label for="">Sort by</label>
-          <select
-          v-model="sortOption"
-          class="form-control"
-          style="width: 350px"
-          >
-          <option value="title">Title</option>
-          <option value="location">Location</option>
-          <option value="price">Price</option>
-          <option value="spaces">Spaces</option>
-        </select>
-        <br />
-        <select
-        v-model="sortOrder"
-        class="form-control m-2"
-        style="width: 350px"
-        >
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
-      </div>
-      
-      <div class="col-md-6 m-2">
-        <input
-        class="form-control"
-        type="text"
-        v-model="searchQuery"
-        placeholder="Search lessons..."
-        />
-      </div>
+      <div class="m-3 col-md-6">
+          <button v-bind:disabled="cart.length == 0" v-on:click="showCheckout"
+            class="btn btn-outline-success btn-lg float-end m-4 p-2">
+            Checkout {{ cartItemCount }}</button><br />
       </div>
     </nav>
     <main>
-    <div v-if="showCourse">
-            <course-list
-              :is="currentComponent"
-              @addcourse="addToCart"
-              @canCart="canAddToCart"
-              @cartcounter="cartCount"
-            ></course-list>
-          </div>
-
-          <div v-else>
-            <checkout
-              :cart="cart"
-              @cartCount="cartCount"
-              @removeItem="removeFromCart"
-              @submitForm="submitForm"
-            ></checkout>
-          </div>
-        </main>
+      <div v-if="showCourse">
+        <course-list :is="currentComponent" @addcourse="addToCart" @canCart="canAddToCart"
+          @cartcounter="cartCount"></course-list>
       </div>
+
+      <div v-else>
+        <checkout :cart="cart" :courses='courses' @cartCount="cartCount" @removeItem="removeFromCart" @submitForm="submitForm"></checkout>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -96,6 +50,9 @@ export default {
   },
 
   created() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
     this.getCourses();
   },
 
@@ -134,7 +91,7 @@ export default {
     },
 
     addToCart(course) {
-      this.cart.push(course);
+      this.cart.push(course.id);
       course.availableInventory--;
     },
 

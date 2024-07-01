@@ -1,86 +1,47 @@
-// var CacheName = 'mohschool-v1';
-// var CacheFiles = [
-//     'index.html',
-//     'cw3.webmanifest',
-//     'public/images/arabic.jpg',
-//     'public/images/arts.jpg',
-//     'public/images/chess.jpg',
-//     'public/images/cooking.jpg',
-//     './public/images/dancing.jpg',
-// ];
+var cacheName = 'mohschool-v1';
+var cacheFiles = [];
 
-// self.addEventListener('install', (e) => {
-//     console.log('service-worker');
-//     e.waituntil(
-//         caches.open(CacheName).then((cache) => {
-//             console.log('[Service Worker] Caching all the Files');
-//             return cache.addAll(CacheFiles);
-//         })
-//     );
-// });
-
-// self.addEventListener('fetch', function (e) {
-//     e.respondWith(
-//         caches.match(e.request).then(function (r) {
-//             //Download the file if is not in the cache,
-//             return r || fetch(e.request).then(function (response){
-//                 //add the new file to cache
-//                 return caches.open(CacheName).then(function (cache) {
-//                     cache.put(e.request, response.clone());
-//                     return response;
-//                 });
-//             });
-//         })
-//     );
-// });
-
-// 
-
-var CacheName = 'mohschool-v1';
-var CacheFiles = [
-    'index.html',
-    'cw3.webmanifest',
-    'css/bootstrap.css',
-    'css/bootstrap.min.css',
-    'css/style.css',
-    'images/arabic.jpg',
-    'images/arts.jpg',
-    'images/chess.jpg',
-    'images/cooking.jpg',
-    'images/dancing.jpg',
-];
-
-self.addEventListener('install', (e) => {
-    console.log('service-worker');
-    e.waitUntil(
-        caches.open(CacheName).then((cache) => {
-            console.log('[Service Worker] Caching all the Files');
-            return Promise.all(
-                CacheFiles.map((file) => {
-                    return cache.add(file).catch((err) => {
-                        console.error(`Failed to cache ${file}: ${err}`);
-                    });
-                })
-            );
+self.addEventListener("install", (e) => {
+    console.log("[ServiceWorker] - Install");
+    e.waitUntil(async () => {
+      const cache = await caches.open(cacheName);
+      console.log("[ServiceWorker] - Caching app files");
+      await cache.addAll(cacheFiles);
+    });
+  });
+  
+  // The activate handler takes care of cleaning up old caches.
+  self.addEventListener("activate", (e) => {
+    e.waitUntil(async () => {
+      const keyList = await caches.keys();
+      await Promise.all(
+        keyList.map((key) => {
+          if (key !== cacheName) {
+            console.log("[ServiceWorker] - Removing old cache", key);
+            return caches.delete(key);
+          }
         })
-    );
-});
-
-self.addEventListener('fetch', function (e) {
-    e.respondWith(
-        caches.match(e.request).then(function (r) {
-            // Download the file if not in the cache
-            return r || fetch(e.request).then(function (response) {
-                // Add the new file to cache
-                return caches.open(CacheName).then(function (cache) {
-                    cache.put(e.request, response.clone());
-                    return response;
-                });
-            }).catch(function () {
-                // Handle the error, for example, return a fallback page
-                return caches.match('offline.html');
+      );
+    });
+    e.waitUntil(self.clients.claim());
+  });
+  
+  self.addEventListener("fetch", (event) => { 
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+  
+        return caches.open(cacheName).then((cache) => {
+          return fetch(event.request).then((response) => {
+            // Put a copy of the response in the runtime cache.
+            return cache.put(event.request, response.clone()).then(() => {
+              return response;
             });
-        })
+          });
+        });
+      })
     );
-});
+  });
 

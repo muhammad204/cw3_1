@@ -1,29 +1,38 @@
 <template>
-  <div>
-    <input v-model="searchQuery" placeholder="Search for courses" />
-    <select v-model="sortOption">
+  <div class="row">
+    
+    <div class="col-md-4">
+    <input v-model="searchQuery" class="form-control" style="width: 350px" type="text" placeholder="Search for courses" />
+    </div>
+
+    <div class="col-md-4">
+    <select v-model="sortOption" class="form-control" style="width: 350px">
       <option value="title">Title</option>
       <option value="location">Location</option>
       <option value="price">Price</option>
     </select>
-    <select v-model="sortOrder">
+    </div>
+    
+    <div class="col-md-4">
+    <select v-model="sortOrder" class="form-control" style="width: 350px">
       <option value="asc">Ascending</option>
       <option value="desc">Descending</option>
     </select>
+    </div>
 
     <div class="row m-4">
       <div class="col-md-4" v-for="course in sortedCourses" :key="course.id">
-        <div class="card md-4 m-2 shadow">
+        <div class="card m-3 shadow">
           <img
             :src="'https://cw-2-smoky.vercel.app/' + course.image"
-            class="ct height: 300px; width: 100%; mx-auto d-block img-fluid"
+            class="ct height: 250px; width: 100%; mx-auto d-block card-img-top"
           />
 
           <div class="card-body">
-            <h2 v-text="course.title"></h2>
-            <p v-html="course.description"></p>
-            <p>Location: {{ course.location }}</p>
-            <p>Price: {{ course.price }}</p>
+            <h2 v-text="course.title" class="card-title"></h2>
+            <p v-html="course.description" class="card-text"></p>
+            <p class="card-text">Location: {{ course.location }}</p>
+            <p class="card-text">Price: {{ course.price }}</p>
 
             <p>
               Available stock:
